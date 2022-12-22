@@ -1,0 +1,11 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const { videoId } = Astro.params;
+if (!videoId) return Astro.redirect("/404");
+---
+
+<Layout title="Video">
+	<main>
+		<h1>{videoId}</h1>
+	</main>
+</Layout>
