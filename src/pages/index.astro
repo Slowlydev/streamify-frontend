@@ -1,20 +1,22 @@
 ---
+import Video from "../components/Video.astro";
 import Layout from "../layouts/Layout.astro";
+
+// TODO get videos from api
 ---
 
 <Layout title="Home">
-	<main></main>
+	<main>
+		<div class="video-container">
+			<Video />
+		</div>
+	</main>
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
+	.video-container {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 	}
 </style>
