@@ -2,6 +2,13 @@
 import Profile from "../components/Profile.astro";
 import Video from "../components/Video.astro";
 import Layout from "../layouts/Layout.astro";
+import { getToken } from "../services/fetch";
+
+const token = getToken();
+
+if (!token) {
+	return Astro.redirect("/signin");
+}
 
 // TODO get videos from api
 ---

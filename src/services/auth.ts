@@ -9,6 +9,6 @@ export const signup = async (authUser: AuthUser) => {
 	return fetch("post", "/auth/signup", authUser);
 };
 
-export const login = async (authUser: AuthUser) => {
-	return fetch("post", "/auth/login", authUser);
+export const signin = async (authUser: AuthUser) => {
+	return fetch("post", "/auth/signin", authUser);
 };

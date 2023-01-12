@@ -12,10 +12,10 @@ export const buildUrl = (endpoint: string, params?: Params): string => {
 	if (endpoint.startsWith("http")) {
 		return `${endpoint}${buildParams(params)}`;
 	}
-	return `${process.env.BACKEND_URL}${endpoint}${buildParams(params)}`;
+	return `${import.meta.env.BACKEND_URL}${endpoint}${buildParams(params)}`;
 };
 
-const parseJwt = (token: string): JwtToken | null => {
+export const parseJwt = (token: string): JwtToken | null => {
 	const base64Url = token.split(".")[1];
 
 	if (!base64Url) return null;
