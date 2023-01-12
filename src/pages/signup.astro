@@ -1,13 +1,18 @@
 ---
 import SignUpForm from "../components/islands/SignUpForm/SignUpForm";
 import Layout from "../layouts/Layout.astro";
+import { getToken } from "../services/fetch";
+
+if (getToken()) {
+	Astro.redirect("/");
+}
 ---
 
 <Layout title="Singup">
 	<main>
 		<h1>Singup</h1>
 
-		<SignUpForm />
+		<SignUpForm client:only />
 	</main>
 </Layout>
 
