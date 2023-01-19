@@ -24,6 +24,7 @@ jobs:
         run: |
           echo "REACT_APP_PORT=3000" >> .env
           echo "REACT_APP_STAGE=production" >> .env
+          echo "REACT_APP_BACKEND_URL=http://example.com" >> .env
 
       - name: install
         run: yarn
