@@ -9,7 +9,7 @@ import Video from '../../components/Video/Video';
 
 const HomePage = (): ReactElement => {
 	const { setTitle } = useLayoutProvider();
-	const { videos } = useVideos({ filters: null });
+	const { videos } = useVideos({});
 
 	useEffect(() => {
 		setTitle('Home');

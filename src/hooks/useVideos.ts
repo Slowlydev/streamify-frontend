@@ -3,7 +3,7 @@ import { getVideos } from '../services/videoService';
 import { Video } from '../types/video.type';
 
 type Props = {
-	filters: unknown;
+	filters?: { title?: Video['title'] };
 };
 
 type ReturnType = {
