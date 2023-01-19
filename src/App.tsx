@@ -6,6 +6,7 @@ import HomePage from './container/HomePage/HomePage';
 import NotFoundPage from './container/NotFoundPage/NotFoundPage';
 import SigninPage from './container/SigninPage/SigninPage';
 import SignupPage from './container/SignupPage/SignupPage';
+import VideoDetailPage from './container/VideoDetailPage/VideoDetailPage';
 
 const App = (): ReactElement => {
 	return (
@@ -16,6 +17,10 @@ const App = (): ReactElement => {
 
 				<Route path={'/'} element={<PrivateRoute />}>
 					<Route path={'/'} element={<HomePage />} />
+				</Route>
+
+				<Route path={'/video/:id'} element={<PrivateRoute />}>
+					<Route path={'/video/:id'} element={<VideoDetailPage />} />
 				</Route>
 
 				<Route path={'/auth/signup'} element={<SignupPage />} />
