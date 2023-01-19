@@ -1,27 +1,17 @@
-import { ReactElement, useState, useEffect } from 'react';
+import { ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
-import styles from './UserDetailPage.module.css';
 import pages from '../../common/styles/pages.module.css';
 import ErrorState from '../../components/ErrorState/ErrorState';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import useUser from '../../hooks/useUser';
-import { imageFetch } from '../../services/image';
+import ProfileImage from '../../components/ProfileImage/ProfileImage';
 import Video from '../../components/Video/Video';
+import useUser from '../../hooks/useUser';
 import { sumDislikes, sumLikes } from '../../utils/video.util';
+import styles from './UserDetailPage.module.css';
 
 const UserDetailPage = (): ReactElement | null => {
-	const [profileImage, setProfileImage] = useState<string>();
-
 	const { id } = useParams();
 	const { user, videos, isLoading, hasError } = useUser({ id });
-
-	useEffect(() => {
-		const fetchProfile = async (): Promise<void> => {
-			const { data } = await imageFetch(`/user/${id}/profile-image`);
-			setProfileImage(data);
-		};
-		fetchProfile();
-	}, [id]);
 
 	return (
 		<main className={pages.topWrapper}>
@@ -32,7 +22,7 @@ const UserDetailPage = (): ReactElement | null => {
 					<section className={styles.profileSection}>
 						<div className={pages.wrapper}>
 							<div className={styles.profileInfo}>
-								<img className={styles.profile} alt="profile" src={profileImage} />
+								<ProfileImage user={user} />
 								<div>
 									<h1>{user.username}</h1>
 									<p>{`All likes: ${sumLikes(videos)}`}</p>
