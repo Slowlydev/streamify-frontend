@@ -11,7 +11,7 @@ const PrivateRoute = (): ReactElement => {
 	}
 
 	if (!user) {
-		sessionStorage.setItem('login_route', window.location.pathname);
+		sessionStorage.setItem('signin_route', window.location.pathname);
 		return <Navigate to={'/auth/signin'} replace />;
 	}
 

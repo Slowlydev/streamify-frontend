@@ -26,10 +26,10 @@ const SigninPage = (): ReactElement => {
 			await signin(values.username, values.password);
 			addSuccess(t('notifications.signin.success'));
 			navigate(
-				sessionStorage.getItem('login_route')
-					? sessionStorage.getItem('login_route')?.includes('/auth')
+				sessionStorage.getItem('signin_route')
+					? sessionStorage.getItem('signin_route')?.includes('/auth')
 						? '/'
-						: sessionStorage.getItem('login_route') ?? '/'
+						: sessionStorage.getItem('signin_route') ?? '/'
 					: '/',
 			);
 		} catch (err) {
