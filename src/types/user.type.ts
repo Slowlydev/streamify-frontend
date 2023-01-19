@@ -1,4 +1,4 @@
-import { Base } from './common.type';
+import { Base } from './base.type';
 import { Language } from './language.type';
 
 export type User = Base & {

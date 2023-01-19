@@ -1,4 +1,4 @@
-import { Base } from './common.type';
+import { Base } from './base.type';
 import { User } from './user.type';
 
 export type Video = Base & {
