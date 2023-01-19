@@ -25,7 +25,13 @@ const SigninPage = (): ReactElement => {
 		try {
 			await signin(values.username, values.password);
 			addSuccess(t('notifications.signin.success'));
-			navigate(sessionStorage.getItem('login_route') ?? '/');
+			navigate(
+				sessionStorage.getItem('login_route')
+					? sessionStorage.getItem('login_route')?.includes('/auth')
+						? '/'
+						: sessionStorage.getItem('login_route') ?? '/'
+					: '/',
+			);
 		} catch (err) {
 			addFailure(t('notifications.signin.failure'));
 			console.error(err);
