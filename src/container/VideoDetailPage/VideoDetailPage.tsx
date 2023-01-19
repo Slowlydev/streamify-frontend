@@ -41,9 +41,11 @@ const VideoDetailPage = (): ReactElement => {
 					<p>{video.description}</p>
 				</div>
 
-				<p>
-					Likes: {video.likes} - Dislikes: {video.dislikes}
-				</p>
+				<div>
+					<p>Views: {video.views}</p>
+					<p>Likes: {video.likes}</p>
+					<p>Dislikes: {video.dislikes}</p>
+				</div>
 			</div>
 
 			<div className={styles.profileInfo}>
