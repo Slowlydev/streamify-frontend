@@ -1,12 +1,8 @@
-import type { Base } from "./base.type";
-
-export type AuthUser = {
-	username: string;
-	password: string;
-};
+import { Base } from './common.type';
+import { Language } from './language.type';
 
 export type User = Base & {
 	username: string;
-	language: string;
-	theme: string;
+	language: Language;
+	theme: 'auto' | 'light' | 'dark';
 };

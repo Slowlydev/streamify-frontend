@@ -1,0 +1,53 @@
+.wrapper {
+	top: 0;
+	right: 0;
+	z-index: 200;
+	max-height: 40vh;
+	position: absolute;
+	overflow: hidden auto;
+}
+
+.notification {
+	min-width: 250px;
+	max-width: 400px;
+	margin: 8px;
+	padding: 16px 24px;
+	font-size: 16px;
+	border-radius: 2px;
+	background-color: var(--background-primary);
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 15px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.label {
+	font-size: 20px;
+	font-weight: 500;
+	padding-bottom: 8px;
+}
+
+.message {
+	font-size: 16px;
+	font-weight: 400;
+	color: var(--text-primary);
+}
+
+.successLabel {
+	color: var(--notification-success-label);
+}
+
+.successBody {
+	background-color: var(--notification-success-body);
+}
+
+.failureLabel {
+	color: var(--notification-failure-label);
+}
+
+.failureBody {
+	background-color: var(--notification-failure-body);
+}
