@@ -6,6 +6,7 @@ import HomePage from './container/HomePage/HomePage';
 import NotFoundPage from './container/NotFoundPage/NotFoundPage';
 import SigninPage from './container/SigninPage/SigninPage';
 import SignupPage from './container/SignupPage/SignupPage';
+import UserDetailPage from './container/UserDetailPage/UserDetailPage';
 import VideoDetailPage from './container/VideoDetailPage/VideoDetailPage';
 
 const App = (): ReactElement => {
@@ -21,6 +22,10 @@ const App = (): ReactElement => {
 
 				<Route path={'/video/:id'} element={<PrivateRoute />}>
 					<Route path={'/video/:id'} element={<VideoDetailPage />} />
+				</Route>
+
+				<Route path={'/user/:id'} element={<PrivateRoute />}>
+					<Route path={'/user/:id'} element={<UserDetailPage />} />
 				</Route>
 
 				<Route path={'/auth/signup'} element={<SignupPage />} />

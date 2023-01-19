@@ -39,7 +39,7 @@ const ProfileBar = (): ReactElement | null => {
 				</Link>
 
 				{user ? (
-					<div className={styles.profile}>
+					<div className={styles.profile} onClick={() => navigate(`/user/${user.id}`)}>
 						<img src={profile} alt="profile" />
 						<div>
 							<p className={styles.username}>{user.username}</p>

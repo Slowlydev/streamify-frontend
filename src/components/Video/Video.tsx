@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { imageFetch } from '../../services/image';
 import { Video as VideoType } from '../../types/video.type';
+import { comparativeTime } from '../../utils/date.util';
 import styles from './Video.module.css';
 
 type Props = {
@@ -28,14 +29,16 @@ const Video = ({ video }: Props): ReactElement => {
 	}, [video]);
 
 	return (
-		<div className={styles.video} onClick={() => navigate(`/video/${video.id}`)}>
-			<img className={styles.thumbnail} src={img} alt="thumbnail" />
-			<div className={styles.videoInfo}>
+		<div className={styles.video}>
+			<img className={styles.thumbnail} src={img} alt="thumbnail" onClick={() => navigate(`/video/${video.id}`)} />
+			<div className={styles.videoInfo} onClick={() => navigate(`/user/${video.user.id}`)}>
 				<img src={profile} alt="profile" />
 				<div>
 					<p className={styles.title}>{video.title}</p>
 					<p className={styles.username}>{video.user.username}</p>
-					<p className={styles.info}>{video.likes} Likes - TODO</p>
+					<p className={styles.info}>
+						{video.likes} Likes - {comparativeTime(new Date(), new Date(video.createdAt))}
+					</p>
 				</div>
 			</div>
 		</div>
