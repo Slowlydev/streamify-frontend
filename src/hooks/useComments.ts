@@ -4,7 +4,7 @@ import { Comment } from '../types/comment.type';
 import { Video } from '../types/video.type';
 
 type Props = {
-	video: Video;
+	video?: Video;
 };
 
 type ReturnType = {
@@ -21,16 +21,18 @@ const useComments = ({ video }: Props): ReturnType => {
 
 	const fetchComments = useCallback(
 		async (controller?: AbortController, silent?: boolean) => {
-			try {
-				!silent && setIsLoading(true);
-				const { data } = await getComments(video.id, controller);
-				setComments(data ?? null);
-				!silent && setIsLoading(false);
-				setHasError(false);
-			} catch (err) {
-				if (!controller?.signal.aborted) {
-					setIsLoading(false);
-					setHasError(true);
+			if (video) {
+				try {
+					!silent && setIsLoading(true);
+					const { data } = await getComments(video.id, controller);
+					setComments(data ?? null);
+					!silent && setIsLoading(false);
+					setHasError(false);
+				} catch (err) {
+					if (!controller?.signal.aborted) {
+						setIsLoading(false);
+						setHasError(true);
+					}
 				}
 			}
 		},
