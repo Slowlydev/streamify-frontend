@@ -1,6 +1,6 @@
 import type { User } from "../types/user.type";
-import { fetch } from "./fetch";
+import { fetcher } from "./fetch";
 
 export const updateUser = async (id: number, newUser: User) => {
-	return fetch<User>("patch", `/user/${id}`, newUser);
+	return fetcher<User>("patch", `/user/${id}`, newUser);
 };

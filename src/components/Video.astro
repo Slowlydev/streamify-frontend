@@ -1,4 +1,5 @@
 ---
+const { video } = Astro.props;
 ---
 
 <div class="video">
@@ -9,10 +10,10 @@
 	<div class="video-info">
 		<img src="https://yt3.ggpht.com/ihjKj-LaAv85XFylZz-NHZo50j7dW4M-Sncj7kWGEagsp-i5s2L4Z8qRs9_8HY8nuACokEOF=s88-c-k-c0x00ffffff-no-rj" />
 		<div class="video-info-text">
-			<p class="title">Zelda BOTW - Towns Music & Ambience</p>
-			<p class="username">Chillhop</p>
+			<p class="title">{video.title}</p>
+			<p class="username">{video.user.username}</p>
 
-			<p class="info">2m Clicks - A year ago</p>
+			<p class="info">{video.likes} - {video.createdAt}</p>
 		</div>
 	</div>
 </div>

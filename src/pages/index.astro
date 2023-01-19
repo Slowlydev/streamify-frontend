@@ -3,26 +3,22 @@ import Profile from "../components/Profile.astro";
 import Video from "../components/Video.astro";
 import Layout from "../layouts/Layout.astro";
 import { getToken } from "../services/fetch";
+import { getVideos } from "../services/video";
 
 const token = getToken();
 
 if (!token) {
-	return Astro.redirect("/signin");
+	// return Astro.redirect("/signin");
 }
 
-// TODO get videos from api
+const { data: videos } = await getVideos();
 ---
 
 <Layout title="Home">
 	<Profile />
 	<main>
 		<div class="video-container">
-			<Video />
-			<Video />
-			<Video />
-			<Video />
-			<Video />
-			<Video />
+			{videos.map((video) => <Video video={video} />)}
 		</div>
 	</main>
 </Layout>

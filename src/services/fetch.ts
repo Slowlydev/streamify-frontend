@@ -22,8 +22,7 @@ export const parseJwt = (token: string): JwtToken | null => {
 
 	const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
 	const jsonPayload = decodeURIComponent(
-		window
-			.atob(base64)
+		atob(base64)
 			.split("")
 			.map(function (c) {
 				return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
@@ -83,8 +82,6 @@ const parseData = async (response: Response): Promise<unknown> => {
 export const fetcher = async <T>(method: Method, endpoint: string, body?: unknown | null, options?: FetchOptions): Promise<FetchResponse<T>> => {
 	const url = buildUrl(endpoint, options?.params);
 	const token = getToken();
-
-	console.log(body, window);
 
 	const defaultHeaders = getDefaultHeaders(token);
 	const otherHeaders = options?.headers ?? {};
