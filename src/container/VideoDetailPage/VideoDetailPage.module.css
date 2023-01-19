@@ -2,3 +2,25 @@
 	width: 100%;
 	height: 50vh;
 }
+
+.videoInfoContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+
+	margin: 1rem 0;
+}
+
+.videoInfo {
+	display: flex;
+	flex-direction: column;
+}
+
+.profileInfo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	gap: 1rem;
+}
