@@ -6,6 +6,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import logoutIcon from '../../assets/icons/logout.svg';
 
 import styles from './ProfileBar.module.css';
+import { config } from '../../common/config/config';
 
 const ProfileBar = (): ReactElement | null => {
 	const { user, clearUser } = useAuth();
@@ -27,10 +28,7 @@ const ProfileBar = (): ReactElement | null => {
 
 				{user ? (
 					<div className={styles.profile}>
-						<img
-							src="https://wallpapers.com/images/featured/cool-profile-pictures-4co57dtwk64fb7lv.webp"
-							alt="profile"
-						/>
+						<img src={`${config.backendUrl}/user/${user.id}/profile-image`} alt="profile" />
 						<div>
 							<p className={styles.username}>{user.username}</p>
 						</div>
