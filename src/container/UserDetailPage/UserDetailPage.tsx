@@ -22,7 +22,7 @@ const UserDetailPage = (): ReactElement | null => {
 					<section className={styles.profileSection}>
 						<div className={pages.wrapper}>
 							<div className={styles.profileInfo}>
-								<ProfileImage user={user} />
+								<ProfileImage user={user} className={styles.profile} />
 								<div>
 									<h1>{user.username}</h1>
 									<p>{`All likes: ${sumLikes(videos)}`}</p>
