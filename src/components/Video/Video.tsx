@@ -25,7 +25,7 @@ const Video = ({ video }: Props): ReactElement => {
 
 	return (
 		<div className={styles.video}>
-			<img className={styles.thumbnail} src={img} alt={''} onClick={() => navigate(`/video/${video.id}`)} />
+			<img className={styles.thumbnail} src={img} alt={' '} onClick={() => navigate(`/video/${video.id}`)} />
 			<div className={styles.videoInfo} onClick={() => navigate(`/user/${video.user.id}`)}>
 				<ProfileImage user={video.user} />
 				<div>

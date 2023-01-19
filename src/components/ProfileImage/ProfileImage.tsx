@@ -20,7 +20,7 @@ const ProfileImage = ({ user, className }: Props): ReactElement => {
 		fetchProfile();
 	}, [user]);
 
-	return <img src={profile} alt={''} className={cl(className, styles.image)} />;
+	return <img src={profile} alt={' '} className={cl(className, styles.image)} />;
 };
 
 export default ProfileImage;
