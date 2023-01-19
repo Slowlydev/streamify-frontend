@@ -1,6 +1,7 @@
 import { ReactElement, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './UserDetailPage.module.css';
+import pages from '../../common/styles/pages.module.css';
 import ErrorState from '../../components/ErrorState/ErrorState';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import useUser from '../../hooks/useUser';
@@ -23,25 +24,29 @@ const UserDetailPage = (): ReactElement | null => {
 	}, [id]);
 
 	return (
-		<main className={styles.wrapper}>
+		<main className={pages.topWrapper}>
 			{isLoading && <LoadingSpinner size={'large'} />}
 			{hasError && <ErrorState size={'large'} />}
 			{user && videos && !isLoading && !hasError && (
 				<>
 					<section className={styles.profileSection}>
-						<div className={styles.profileInfo}>
-							<img className={styles.profile} alt="profile" src={profileImage} />
-							<div>
-								<h1>{user.username}</h1>
-								<p>{`likes: ${sumLikes(videos)}`}</p>
-								<p>{`dislikes: ${sumDislikes(videos)}`}</p>
+						<div className={pages.wrapper}>
+							<div className={styles.profileInfo}>
+								<img className={styles.profile} alt="profile" src={profileImage} />
+								<div>
+									<h1>{user.username}</h1>
+									<p>{`Likes: ${sumLikes(videos)}`}</p>
+									<p>{`Dislikes: ${sumDislikes(videos)}`}</p>
+								</div>
 							</div>
 						</div>
 					</section>
-					<div className={styles.videoWrapper}>
-						{videos.map((video) => (
-							<Video key={`user.video.${video.id}`} video={video} />
-						))}
+					<div className={pages.wrapper}>
+						<div className={styles.videoWrapper}>
+							{videos.map((video) => (
+								<Video key={`user.video.${video.id}`} video={video} />
+							))}
+						</div>
 					</div>
 				</>
 			)}

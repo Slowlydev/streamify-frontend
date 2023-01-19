@@ -4,6 +4,7 @@ import { config } from '../../common/config/config';
 import pages from '../../common/styles/pages.module.css';
 import { getVideo } from '../../services/videoService';
 import { Video } from '../../types/video.type';
+import { cl } from '../../utils/classnames.util';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import styles from './VideoDetailPage.module.css';
 
@@ -29,7 +30,7 @@ const VideoDetailPage = (): ReactElement => {
 	if (!video) return <LoadingPage />;
 
 	return (
-		<main className={pages.wrapper}>
+		<main className={cl(pages.topWrapper, pages.wrapper)}>
 			<h1>{video.title}</h1>
 			{/*eslint-disable-next-line jsx-a11y/media-has-caption*/}
 			<video controls className={styles.video} src={`${config.backendUrl}/video/${id}/stream`} />

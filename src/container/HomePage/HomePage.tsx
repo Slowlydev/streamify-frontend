@@ -8,6 +8,7 @@ import pages from '../../common/styles/pages.module.css';
 import Video from '../../components/Video/Video';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 import ErrorState from '../../components/ErrorState/ErrorState';
+import { cl } from '../../utils/classnames.util';
 
 const HomePage = (): ReactElement => {
 	const { setTitle } = useLayoutProvider();
@@ -18,7 +19,7 @@ const HomePage = (): ReactElement => {
 	}, [setTitle]);
 
 	return (
-		<main className={pages.wrapper}>
+		<main className={cl(pages.topWrapper, pages.wrapper)}>
 			<div className={styles.videoContainer}>
 				{isLoading && <LoadingSpinner size={'large'} />}
 				{hasError && <ErrorState size={'large'} />}
