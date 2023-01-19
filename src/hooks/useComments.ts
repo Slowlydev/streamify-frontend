@@ -14,7 +14,7 @@ type ReturnType = {
 	reloadComments: (silent?: boolean) => Promise<void>;
 };
 
-const useVideos = ({ video }: Props): ReturnType => {
+const useComments = ({ video }: Props): ReturnType => {
 	const [comments, setComments] = useState<Comment[] | undefined | null>();
 	const [hasError, setHasError] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -56,4 +56,4 @@ const useVideos = ({ video }: Props): ReturnType => {
 	return { comments, isLoading, hasError, reloadComments };
 };
 
-export default useVideos;
+export default useComments;
