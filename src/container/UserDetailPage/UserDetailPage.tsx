@@ -35,8 +35,8 @@ const UserDetailPage = (): ReactElement | null => {
 								<img className={styles.profile} alt="profile" src={profileImage} />
 								<div>
 									<h1>{user.username}</h1>
-									<p>{`Likes: ${sumLikes(videos)}`}</p>
-									<p>{`Dislikes: ${sumDislikes(videos)}`}</p>
+									<p>{`All likes: ${sumLikes(videos)}`}</p>
+									<p>{`All dislikes: ${sumDislikes(videos)}`}</p>
 								</div>
 							</div>
 						</div>
