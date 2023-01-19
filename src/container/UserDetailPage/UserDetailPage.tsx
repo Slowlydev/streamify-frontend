@@ -26,7 +26,7 @@ const UserDetailPage = (): ReactElement | null => {
 		<main className={styles.wrapper}>
 			{isLoading && <LoadingSpinner size={'large'} />}
 			{hasError && <ErrorState size={'large'} />}
-			{user && videos && (
+			{user && videos && !isLoading && !hasError && (
 				<>
 					<section className={styles.profileSection}>
 						<div className={styles.profileInfo}>

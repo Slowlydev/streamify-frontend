@@ -6,10 +6,12 @@ import styles from './HomePage.module.css';
 import pages from '../../common/styles/pages.module.css';
 
 import Video from '../../components/Video/Video';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import ErrorState from '../../components/ErrorState/ErrorState';
 
 const HomePage = (): ReactElement => {
 	const { setTitle } = useLayoutProvider();
-	const { videos } = useVideos({});
+	const { videos, isLoading, hasError } = useVideos({});
 
 	useEffect(() => {
 		setTitle('Home');
@@ -18,7 +20,9 @@ const HomePage = (): ReactElement => {
 	return (
 		<main className={pages.wrapper}>
 			<div className={styles.videoContainer}>
-				{videos && videos.map((video) => <Video key={`video.${video.id}`} video={video} />)}
+				{isLoading && <LoadingSpinner size={'large'} />}
+				{hasError && <ErrorState size={'large'} />}
+				{videos && !isLoading && !hasError && videos.map((video) => <Video key={`video.${video.id}`} video={video} />)}
 			</div>
 		</main>
 	);

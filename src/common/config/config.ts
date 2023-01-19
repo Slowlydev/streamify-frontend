@@ -16,7 +16,7 @@ const validateConfig = (): Config => {
 	if (process.env.REACT_APP_STAGE === 'localhost') {
 		return {
 			stage: 'localhost',
-			backendUrl: 'http://localhost:4000/api',
+			backendUrl: 'http://192.168.1.197:4000/api',
 			frontendUrl: 'http://localhost:3000',
 		};
 	}
