@@ -6,6 +6,6 @@ export const getVideos = (filters: unknown, controller?: AbortController): Promi
 	return fetch<Video[]>('get', '/video', null, { signal: controller?.signal });
 };
 
-export const getVideo = (id: string): Promise<FetchResponse<Video>> => {
+export const getVideo = (id: Video['id']): Promise<FetchResponse<Video>> => {
 	return fetch<Video>('get', `/video/${id}`);
 };
