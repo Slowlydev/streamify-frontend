@@ -1,16 +1,26 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import useVideos from '../../hooks/useVideos';
+import { useLayoutProvider } from '../../providers/LayoutProvider/LayoutProvider';
+
 import styles from './HomePage.module.css';
+import pages from '../../common/styles/pages.module.css';
+
+import Video from '../../components/Video/Video';
 
 const HomePage = (): ReactElement => {
+	const { setTitle } = useLayoutProvider();
 	const { videos } = useVideos({ filters: null });
 
-	console.debug(videos);
+	useEffect(() => {
+		setTitle('Home');
+	}, [setTitle]);
 
 	return (
-		<div className={styles.wrapper}>
-			<h1>TODO: Home Page</h1>
-		</div>
+		<main className={pages.wrapper}>
+			<div className={styles.videoContainer}>
+				{videos && videos.map((video) => <Video key={`video.${video.id}`} video={video} />)}
+			</div>
+		</main>
 	);
 };
 

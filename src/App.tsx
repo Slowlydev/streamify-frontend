@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import ProfileBar from './components/ProfileBar/ProfileBar';
 import HomePage from './container/HomePage/HomePage';
 import NotFoundPage from './container/NotFoundPage/NotFoundPage';
 import SigninPage from './container/SigninPage/SigninPage';
@@ -9,6 +10,7 @@ import SignupPage from './container/SignupPage/SignupPage';
 const App = (): ReactElement => {
 	return (
 		<div className={'main-wrapper'}>
+			<ProfileBar />
 			<Routes>
 				<Route path={'*'} element={<NotFoundPage />} />
 
