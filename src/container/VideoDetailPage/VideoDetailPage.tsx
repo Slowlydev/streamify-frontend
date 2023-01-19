@@ -31,9 +31,21 @@ const VideoDetailPage = (): ReactElement => {
 
 	return (
 		<main className={cl(pages.topWrapper, pages.wrapper)}>
-			<h1>{video.title}</h1>
 			{/*eslint-disable-next-line jsx-a11y/media-has-caption*/}
 			<video controls className={styles.video} src={`${config.backendUrl}/video/${id}/stream`} />
+
+			<h1>{video.title}</h1>
+			<p>{video.description}</p>
+			<p>
+				Likes: {video.likes} - Dislikes: {video.dislikes}
+			</p>
+
+			<div>
+				<img alt="profile" />
+				<div>
+					<p>{video.user.username}</p>
+				</div>
+			</div>
 		</main>
 	);
 };
