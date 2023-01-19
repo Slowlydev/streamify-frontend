@@ -1,7 +1,6 @@
 type Config = {
 	stage: 'localhost' | 'development' | 'production';
 	backendUrl: string;
-	frontendUrl: string;
 };
 
 const validateConfig = (): Config => {
@@ -13,31 +12,18 @@ const validateConfig = (): Config => {
 		throw new Error('no stage specified');
 	}
 
-	if (process.env.REACT_APP_STAGE === 'localhost') {
-		return {
-			stage: 'localhost',
-			backendUrl: 'http://192.168.1.197:4000/api',
-			frontendUrl: 'http://localhost:3000',
-		};
+	if (!process.env.REACT_APP_BACKEND_URL) {
+		throw new Error('no backend url specified');
 	}
 
-	if (process.env.REACT_APP_STAGE === 'development') {
-		return {
-			stage: 'development',
-			backendUrl: 'http://to.be.determined.com/api',
-			frontendUrl: 'http://to.be.determined.com',
-		};
+	if (!['localhost', 'development', 'production'].includes(process.env.REACT_APP_STAGE)) {
+		throw new Error(`unknown stage ${process.env.REACT_APP_STAGE}`);
 	}
 
-	if (process.env.REACT_APP_STAGE === 'production') {
-		return {
-			stage: 'production',
-			backendUrl: 'https://to.be.determined.com/api',
-			frontendUrl: 'https://to.be.determined.com',
-		};
-	}
-
-	throw new Error(`unknown stage ${process.env.REACT_APP_STAGE}`);
+	return {
+		stage: process.env.REACT_APP_STAGE as Config['stage'],
+		backendUrl: process.env.REACT_APP_BACKEND_URL,
+	};
 };
 
 const config = validateConfig();
