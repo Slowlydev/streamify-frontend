@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../providers/AuthProvider/AuthProvider';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
@@ -7,8 +7,11 @@ import logoutIcon from '../../assets/icons/logout.svg';
 
 import styles from './ProfileBar.module.css';
 import { config } from '../../common/config/config';
+import { image } from '../../services/image';
 
 const ProfileBar = (): ReactElement | null => {
+	const [profile, setProfile] = useState<string>();
+
 	const { user, clearUser } = useAuth();
 
 	const location = useLocation();
@@ -18,6 +21,16 @@ const ProfileBar = (): ReactElement | null => {
 		clearUser();
 		navigate('/auth/signin');
 	};
+
+	useEffect(() => {
+		if (user) {
+			const fetchProfile = async (): Promise<void> => {
+				const { data } = await image(`/user/${user.id}/profile-image`);
+				setProfile(data);
+			};
+			fetchProfile();
+		}
+	}, [user]);
 
 	if (location.pathname.includes('auth')) return null;
 
@@ -30,7 +43,7 @@ const ProfileBar = (): ReactElement | null => {
 
 				{user ? (
 					<div className={styles.profile}>
-						<img src={`${config.backendUrl}/user/${user.id}/profile-image`} alt="profile" />
+						<img src={profile} alt="profile" />
 						<div>
 							<p className={styles.username}>{user.username}</p>
 						</div>

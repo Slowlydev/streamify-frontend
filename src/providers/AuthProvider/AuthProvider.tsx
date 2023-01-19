@@ -44,8 +44,6 @@ const AuthProvider = ({ children }: Props): ReactElement => {
 	const [signingUp, setSigningUp] = useState<boolean>(false);
 	const [signingIn, setSigningIn] = useState<boolean>(false);
 
-	console.log(loading);
-
 	useEffect(() => {
 		const controller = new AbortController();
 		const fetch = async (): Promise<void> => {
