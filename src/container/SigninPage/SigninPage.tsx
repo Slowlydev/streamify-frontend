@@ -27,6 +27,7 @@ const SigninPage = (): ReactElement => {
 			await signin(values.username, values.password);
 			addSuccess(t('notifications.signin.success'));
 			navigate(handleSigninRedirect(sessionStorage.getItem('signin_route')));
+			sessionStorage.removeItem('signin_route');
 		} catch (err) {
 			addFailure(t('notifications.signin.failure'));
 			console.error(err);
