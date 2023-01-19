@@ -6,6 +6,7 @@ import './App.css';
 import LoadingPage from './container/LoadingPage/LoadingPage';
 import './index.css';
 import { AuthProvider } from './providers/AuthProvider/AuthProvider';
+import { LayoutProvider } from './providers/LayoutProvider/LayoutProvider';
 import { NotificationProvider } from './providers/NotificationProvider/NotificationProvider';
 import { WindowSizeProvider } from './providers/WindowSizeProvider/WindowSizeProvider';
 
@@ -20,11 +21,13 @@ root.render(
 		<Suspense fallback={<LoadingPage />}>
 			<NotificationProvider>
 				<WindowSizeProvider>
-					<AuthProvider>
-						<BrowserRouter>
-							<App />
-						</BrowserRouter>
-					</AuthProvider>
+					<LayoutProvider>
+						<AuthProvider>
+							<BrowserRouter>
+								<App />
+							</BrowserRouter>
+						</AuthProvider>
+					</LayoutProvider>
 				</WindowSizeProvider>
 			</NotificationProvider>
 		</Suspense>
