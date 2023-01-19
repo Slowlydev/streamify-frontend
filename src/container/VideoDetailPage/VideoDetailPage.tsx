@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { config } from '../../common/config/config';
 import pages from '../../common/styles/pages.module.css';
+import ProfileImage from '../../components/ProfileImage/ProfileImage';
 import { getVideo } from '../../services/videoService';
 import { Video } from '../../types/video.type';
 import { cl } from '../../utils/classnames.util';
@@ -34,14 +35,19 @@ const VideoDetailPage = (): ReactElement => {
 			{/*eslint-disable-next-line jsx-a11y/media-has-caption*/}
 			<video controls className={styles.video} src={`${config.backendUrl}/video/${id}/stream`} />
 
-			<h1>{video.title}</h1>
-			<p>{video.description}</p>
-			<p>
-				Likes: {video.likes} - Dislikes: {video.dislikes}
-			</p>
+			<div className={styles.videoInfoContainer}>
+				<div className={styles.videoInfo}>
+					<h1>{video.title}</h1>
+					<p>{video.description}</p>
+				</div>
 
-			<div>
-				<img alt="profile" />
+				<p>
+					Likes: {video.likes} - Dislikes: {video.dislikes}
+				</p>
+			</div>
+
+			<div className={styles.profileInfo}>
+				<ProfileImage user={video.user} />
 				<div>
 					<p>{video.user.username}</p>
 				</div>
