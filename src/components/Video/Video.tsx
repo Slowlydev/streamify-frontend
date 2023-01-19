@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { image } from '../../services/image';
+import { imageFetch } from '../../services/image';
 import { Video as VideoType } from '../../types/video.type';
 import styles from './Video.module.css';
 
@@ -16,11 +16,11 @@ const Video = ({ video }: Props): ReactElement => {
 
 	useEffect(() => {
 		const fetchImage = async (): Promise<void> => {
-			const { data } = await image(`/video/${video.id}/thumbnail`);
+			const { data } = await imageFetch(`/video/${video.id}/thumbnail`);
 			setImg(data);
 		};
 		const fetchProfile = async (): Promise<void> => {
-			const { data } = await image(`/user/${video.user.id}/profile-image`);
+			const { data } = await imageFetch(`/user/${video.user.id}/profile-image`);
 			setProfile(data);
 		};
 		fetchImage();

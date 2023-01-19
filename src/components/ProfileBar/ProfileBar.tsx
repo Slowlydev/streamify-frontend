@@ -1,13 +1,10 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../providers/AuthProvider/AuthProvider';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
-
 import logoutIcon from '../../assets/icons/logout.svg';
-
+import { useAuth } from '../../providers/AuthProvider/AuthProvider';
+import { imageFetch } from '../../services/image';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import styles from './ProfileBar.module.css';
-import { config } from '../../common/config/config';
-import { image } from '../../services/image';
 
 const ProfileBar = (): ReactElement | null => {
 	const [profile, setProfile] = useState<string>();
@@ -25,7 +22,7 @@ const ProfileBar = (): ReactElement | null => {
 	useEffect(() => {
 		if (user) {
 			const fetchProfile = async (): Promise<void> => {
-				const { data } = await image(`/user/${user.id}/profile-image`);
+				const { data } = await imageFetch(`/user/${user.id}/profile-image`);
 				setProfile(data);
 			};
 			fetchProfile();

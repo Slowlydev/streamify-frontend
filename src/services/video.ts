@@ -6,8 +6,8 @@ import { getToken, validateStatus } from './fetch';
 
 const getDefaultHeaders = (token: string | null): Headers => {
 	return {
-		Accept: 'image/png',
-		'Content-Type': 'image/png;charset=UTF-8',
+		Accept: 'video/mp4',
+		'Content-Type': 'video/mp4;charset=UTF-8',
 		'Accept-Language': i18next.language,
 		Authorization: token ? `Bearer ${token}` : '',
 	};
@@ -23,14 +23,14 @@ const parseData = async (response: Response): Promise<string | undefined> => {
 		throw error;
 	}
 	try {
-		const img = URL.createObjectURL(await response.blob());
-		return img;
+		const vid = URL.createObjectURL(await response.blob());
+		return vid;
 	} catch {
 		return void 0;
 	}
 };
 
-export const imageFetch = async (
+export const videoFetch = async (
 	endpoint: string,
 	options?: FetchOptions,
 ): Promise<FetchResponse<string | undefined>> => {
