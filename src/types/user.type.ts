@@ -1,4 +1,8 @@
-export type User = {
+import { Base } from './common.type';
+import { Language } from './language.type';
+
+export type User = Base & {
 	username: string;
-	password: string;
+	language: Language;
+	theme: 'auto' | 'light' | 'dark';
 };
