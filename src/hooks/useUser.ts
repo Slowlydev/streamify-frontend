@@ -3,7 +3,7 @@ import { getUser } from '../services/userService';
 import { User } from '../types/user.type';
 
 type Props = {
-	id: User['id'];
+	id?: User['id'];
 };
 
 type ReturnType = {
@@ -20,16 +20,18 @@ const useUser = ({ id }: Props): ReturnType => {
 
 	const fetchVideos = useCallback(
 		async (controller?: AbortController, silent?: boolean) => {
-			try {
-				!silent && setIsLoading(true);
-				const { data } = await getUser(id, controller);
-				setUser(data ?? null);
-				!silent && setIsLoading(false);
-				setHasError(false);
-			} catch (err) {
-				if (!controller?.signal.aborted) {
-					setIsLoading(false);
-					setHasError(true);
+			if (id) {
+				try {
+					!silent && setIsLoading(true);
+					const { data } = await getUser(id, controller);
+					setUser(data ?? null);
+					!silent && setIsLoading(false);
+					setHasError(false);
+				} catch (err) {
+					if (!controller?.signal.aborted) {
+						setIsLoading(false);
+						setHasError(true);
+					}
 				}
 			}
 		},
