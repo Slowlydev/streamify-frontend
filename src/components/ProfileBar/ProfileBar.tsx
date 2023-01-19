@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../providers/AuthProvider/AuthProvider';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
@@ -24,7 +24,9 @@ const ProfileBar = (): ReactElement | null => {
 	return (
 		<header>
 			<div>
-				<p className={styles.title}>Streamify</p>
+				<Link className={styles.title} to={'/'}>
+					Streamify
+				</Link>
 
 				{user ? (
 					<div className={styles.profile}>

@@ -19,7 +19,7 @@ const parseJwt = (token: string): JwtToken => {
 	return JSON.parse(jsonPayload);
 };
 
-const getToken = (): string | null => {
+export const getToken = (): string | null => {
 	const token = localStorage.getItem('access_token');
 	if (!token) {
 		return null;
@@ -42,7 +42,7 @@ const getDefaultHeaders = (token: string | null): Headers => {
 	};
 };
 
-const validateStatus = (status: number): boolean => {
+export const validateStatus = (status: number): boolean => {
 	return status >= 200 && status < 300;
 };
 
@@ -66,7 +66,7 @@ const parseData = async (response: Response): Promise<unknown> => {
 	}
 };
 
-const fetch = async <T>(
+export const fetch = async <T>(
 	method: Method,
 	endpoint: string,
 	body?: unknown | null,
@@ -96,5 +96,3 @@ const fetch = async <T>(
 
 	return { status, statusText, data: data as T };
 };
-
-export { fetch, getToken };
