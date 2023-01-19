@@ -7,6 +7,8 @@ import { timeout } from '../../utils/timeout.util';
 const AuthContext = createContext<Values>({
 	user: null,
 	loading: true,
+	signingUp: false,
+	signingIn: false,
 	signin: async () => {
 		await timeout(0);
 		return void 0;
@@ -25,6 +27,8 @@ type Props = {
 type Values = {
 	user: User | null;
 	loading: boolean;
+	signingUp: boolean;
+	signingIn: boolean;
 	signin: (username: string, password: string) => Promise<void>;
 	signup: (username: string, password: string) => Promise<void>;
 	clearUser: () => void;
@@ -37,6 +41,10 @@ const useAuth = (): Values => {
 const AuthProvider = ({ children }: Props): ReactElement => {
 	const [user, setUser] = useState<User | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [signingUp, setSigningUp] = useState<boolean>(false);
+	const [signingIn, setSigningIn] = useState<boolean>(false);
+
+	console.log(loading);
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -56,12 +64,22 @@ const AuthProvider = ({ children }: Props): ReactElement => {
 	}, []);
 
 	const signup = async (username: string, password: string): Promise<void> => {
+		setSigningUp(true);
 		await signupUser(username, password);
+		const { data } = await signinUser(username, password);
+		localStorage.setItem('access_token', data.access_token);
+		const { data: userData } = await fetchUser();
+		setUser(userData);
+		setSigningUp(false);
 	};
 
 	const signin = async (username: string, password: string): Promise<void> => {
+		setSigningIn(true);
 		const { data } = await signinUser(username, password);
 		localStorage.setItem('access_token', data.access_token);
+		const { data: userData } = await fetchUser();
+		setUser(userData);
+		setSigningIn(false);
 	};
 
 	const clearUser = (): void => {
@@ -69,7 +87,7 @@ const AuthProvider = ({ children }: Props): ReactElement => {
 		setUser(null);
 	};
 
-	const value: Values = { user, loading, signin, signup, clearUser };
+	const value: Values = { user, loading, signingUp, signingIn, signin, signup, clearUser };
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

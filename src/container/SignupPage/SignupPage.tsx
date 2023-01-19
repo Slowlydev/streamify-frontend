@@ -30,7 +30,7 @@ const SignupPage = (): ReactElement => {
 		try {
 			await signup(values.username, values.password);
 			addSuccess(t('notifications.signup.success'));
-			navigate('/auth/login');
+			navigate('/');
 		} catch (err) {
 			addFailure(t('notifications.signup.failure'));
 			console.error(err);

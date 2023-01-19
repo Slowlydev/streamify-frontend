@@ -7,6 +7,7 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import { useAuth } from '../../providers/AuthProvider/AuthProvider';
 import { useNotifications } from '../../providers/NotificationProvider/NotificationProvider';
+import { handleSigninRedirect } from '../../utils/signin.util';
 import styles from './SigninPage.module.css';
 
 type InitialValues = {
@@ -25,13 +26,8 @@ const SigninPage = (): ReactElement => {
 		try {
 			await signin(values.username, values.password);
 			addSuccess(t('notifications.signin.success'));
-			navigate(
-				sessionStorage.getItem('signin_route')
-					? sessionStorage.getItem('signin_route')?.includes('/auth')
-						? '/'
-						: sessionStorage.getItem('signin_route') ?? '/'
-					: '/',
-			);
+			console.debug(handleSigninRedirect(sessionStorage.getItem('signin_route')));
+			navigate(handleSigninRedirect(sessionStorage.getItem('signin_route')));
 		} catch (err) {
 			addFailure(t('notifications.signin.failure'));
 			console.error(err);
