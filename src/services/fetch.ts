@@ -1,47 +1,32 @@
-import type { FetchError, FetchOptions, FetchResponse, Headers, JwtToken, Method, Params } from "../types/fetch.type";
+import { config } from '../common/config/config';
+import i18next from '../i18n';
+import { FetchError, FetchOptions, FetchResponse, Headers, JwtToken, Method } from '../types/fetch.type';
+import { buildUrl } from '../utils/url.util';
 
-export const buildParams = (params?: Params): string => {
-	if (params) {
-		Object.keys(params).forEach((key) => (params[key] === undefined ? delete params[key] : {}));
-		return `?${new URLSearchParams(params as Record<string, string>)}`;
-	}
-	return "";
-};
-
-export const buildUrl = (endpoint: string, params?: Params): string => {
-	if (endpoint.startsWith("http")) {
-		return `${endpoint}${buildParams(params)}`;
-	}
-	return `${import.meta.env.PUBLIC_BACKEND_URL}${endpoint}${buildParams(params)}`;
-};
-
-export const parseJwt = (token: string): JwtToken | null => {
-	const base64Url = token.split(".")[1];
-
-	if (!base64Url) return null;
-
-	const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+const parseJwt = (token: string): JwtToken => {
+	const base64Url = token.split('.')[1];
+	const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
 	const jsonPayload = decodeURIComponent(
 		window
 			.atob(base64)
-			.split("")
+			.split('')
 			.map(function (c) {
-				return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+				return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 			})
-			.join("")
+			.join(''),
 	);
 
 	return JSON.parse(jsonPayload);
 };
 
-export const getToken = (): string | null => {
-	const token = localStorage.getItem("access_token");
+const getToken = (): string | null => {
+	const token = localStorage.getItem('access_token');
 	if (!token) {
 		return null;
 	}
 
 	const payload = parseJwt(token);
-	if (!payload || payload.exp < Math.floor(Date.now() / 1000)) {
+	if (payload.exp < Math.floor(Date.now() / 1000)) {
 		return null;
 	}
 
@@ -50,9 +35,10 @@ export const getToken = (): string | null => {
 
 const getDefaultHeaders = (token: string | null): Headers => {
 	return {
-		Accept: "application/json",
-		"Content-Type": "application/json;charset=UTF-8",
-		Authorization: token ? `Bearer ${token}` : "",
+		Accept: 'application/json',
+		'Content-Type': 'application/json;charset=UTF-8',
+		'Accept-Language': i18next.language,
+		Authorization: token ? `Bearer ${token}` : '',
 	};
 };
 
@@ -80,23 +66,29 @@ const parseData = async (response: Response): Promise<unknown> => {
 	}
 };
 
-export const fetcher = async <T>(method: Method, endpoint: string, body?: unknown | null, options?: FetchOptions): Promise<FetchResponse<T>> => {
+const fetch = async <T>(
+	method: Method,
+	endpoint: string,
+	body?: unknown | null,
+	options?: FetchOptions,
+): Promise<FetchResponse<T>> => {
 	const url = buildUrl(endpoint, options?.params);
 	const token = getToken();
-
-	console.log(body, window);
 
 	const defaultHeaders = getDefaultHeaders(token);
 	const otherHeaders = options?.headers ?? {};
 	const combinedHeaders = { ...defaultHeaders, ...otherHeaders };
 
-	const response = await fetch(url, {
-		method,
+	if (config.stage === 'localhost') {
+		await new Promise((resolve) => setTimeout(resolve, 500));
+	}
+
+	const response = await window.fetch(url, {
+		method: method.toUpperCase(),
 		body: body ? JSON.stringify(body) : null,
 		headers: combinedHeaders,
-		...(options?.signal && { signal: options.signal }),
+		signal: options?.signal,
 	});
-
 	const data = await parseData(response);
 
 	const status = response.status;
@@ -104,3 +96,5 @@ export const fetcher = async <T>(method: Method, endpoint: string, body?: unknow
 
 	return { status, statusText, data: data as T };
 };
+
+export { fetch, getToken };
