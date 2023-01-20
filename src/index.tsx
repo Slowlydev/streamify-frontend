@@ -9,6 +9,7 @@ import { AuthProvider } from './providers/AuthProvider/AuthProvider';
 import { LayoutProvider } from './providers/LayoutProvider/LayoutProvider';
 import { NotificationProvider } from './providers/NotificationProvider/NotificationProvider';
 import { WindowSizeProvider } from './providers/WindowSizeProvider/WindowSizeProvider';
+import packageJson from '../package.json';
 
 const element = document.getElementById('root');
 if (!element) {
@@ -23,7 +24,7 @@ root.render(
 				<WindowSizeProvider>
 					<LayoutProvider>
 						<AuthProvider>
-							<BrowserRouter>
+							<BrowserRouter basename={packageJson.homepage}>
 								<App />
 							</BrowserRouter>
 						</AuthProvider>
