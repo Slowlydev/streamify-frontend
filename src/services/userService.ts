@@ -8,5 +8,5 @@ export const getUser = (id: User['id'], controller?: AbortController): Promise<F
 };
 
 export const getVideosOfUser = (id: User['id'], controller?: AbortController): Promise<FetchResponse<Video[]>> => {
-	return fetch<Video[]>('get', `/user/${id}/video`, null, { signal: controller?.signal });
+	return fetch<Video[]>('get', `/video`, null, { signal: controller?.signal, params: { userId: id } });
 };
