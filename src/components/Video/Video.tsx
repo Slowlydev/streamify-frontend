@@ -32,8 +32,9 @@ const Video = ({ video }: Props): ReactElement => {
 					<p className={styles.title}>{video.title}</p>
 					<p className={styles.username}>{video.user.username}</p>
 					<div className={styles.info}>
-						<p>views: {video.views}</p>
-						{video.likes} Likes - {comparativeTime(new Date(), new Date(video.createdAt))}
+						<p>
+							{video.views} Views - {video.likes} Likes - {comparativeTime(new Date(), new Date(video.createdAt))}
+						</p>
 					</div>
 				</div>
 			</div>
