@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { config } from '../../common/config/config';
 import pages from '../../common/styles/pages.module.css';
+import CommentSection from '../../components/CommentSection/CommentSection';
 import ProfileImage from '../../components/ProfileImage/ProfileImage';
 import { getVideo } from '../../services/videoService';
 import { Video } from '../../types/video.type';
@@ -54,6 +55,9 @@ const VideoDetailPage = (): ReactElement => {
 					<p>{video.user.username}</p>
 				</div>
 			</div>
+
+			<h2>Comments</h2>
+			<CommentSection video={video} />
 		</main>
 	);
 };

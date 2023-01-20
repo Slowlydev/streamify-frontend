@@ -1,0 +1,16 @@
+.textarea {
+	width: calc(100% - 18px);
+	min-height: 5rem;
+
+	padding: 1rem;
+
+	border-radius: 1rem;
+
+	border-width: 1px;
+	border-style: solid;
+	border-color: var(--input-border);
+
+	color: var(--text-primary);
+
+	background-color: var(--background-primary);
+}
