@@ -2,7 +2,7 @@
 # react bootstrap script
 
 export TERM="xterm-color"
-name=streamify
+name=streamify-frontend
 source .env
 export REACT_APP_PORT=${REACT_APP_PORT}
 
