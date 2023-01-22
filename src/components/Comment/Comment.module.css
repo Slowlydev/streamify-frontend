@@ -1,0 +1,10 @@
+.comment {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+}
+
+.commentContent {
+	display: flex;
+	flex-direction: column;
+}
