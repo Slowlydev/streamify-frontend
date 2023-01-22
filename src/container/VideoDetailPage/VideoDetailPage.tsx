@@ -56,7 +56,7 @@ const VideoDetailPage = (): ReactElement => {
 				</div>
 			</div>
 
-			<h2>Comments</h2>
+			<h2 className={styles.commentsTitle}>Comments</h2>
 			<CommentSection video={video} />
 		</main>
 	);

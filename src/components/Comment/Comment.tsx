@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import { Comment as CommentType } from '../../types/comment.type';
+import { comparativeTime } from '../../utils/date.util';
 import ProfileImage from '../ProfileImage/ProfileImage';
 
 import styles from './Comment.module.css';
@@ -19,8 +20,8 @@ const Comment = ({ comment }: Props): ReactElement => {
 					<p>{comment.content}</p>
 				</div>
 
-				<div>
-					<p>{new Date(comment.createdAt).toLocaleString()}</p>
+				<div className={styles.commentData}>
+					<p>{comparativeTime(new Date(), new Date(comment.createdAt))}</p>
 				</div>
 			</div>
 		</div>
