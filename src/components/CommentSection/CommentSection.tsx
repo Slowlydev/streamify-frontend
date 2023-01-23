@@ -83,14 +83,18 @@ const CommentSection = ({ video }: Props): ReactElement => {
 										onBlur={() => setFieldTouched('content', true)}
 										placeholder={'Type here to post a new comment'}
 									/>
-									{touched.content && !!errors.content && <div className={styles.validation}>{errors.content}</div>}
-									<Button
-										type={'submit'}
-										text={t('common.post')}
-										color={'blue'}
-										loading={isSubmitting}
-										disabled={!isValid && (submitCount > 0 || isSubmitting)}
-									/>
+									{values.content.length > 7 && touched.content && !!errors.content && (
+										<div className={styles.validation}>{errors.content}</div>
+									)}
+									{values.content.length > 7 && (
+										<Button
+											type={'submit'}
+											text="Post"
+											color="blue"
+											loading={isSubmitting}
+											disabled={!isValid && (submitCount > 0 || isSubmitting)}
+										/>
+									)}
 								</form>
 							);
 						}}
