@@ -1,5 +1,7 @@
 {
 	"common": {
+		"save": "Save",
+		"post": "Post",
 		"username": "Username",
 		"password": "Password"
 	},
@@ -31,11 +33,15 @@
 		"signin": {
 			"success": "Successfully signed in",
 			"failure": "Failed to sign in"
+		},
+		"comment": {
+			"success": "Successfully created comment",
+			"failure": "Failed to create comment"
 		}
 	},
 	"form-validation": {
 		"required": "This field is required",
-		"too-short": "Too little character",
+		"too-short": "Too little characters",
 		"too-long": "Too many characters",
 		"username": "Only letters, numbers and dashes allowed"
 	},
