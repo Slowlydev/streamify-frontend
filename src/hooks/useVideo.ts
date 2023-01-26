@@ -52,7 +52,7 @@ const useVideo = ({ id }: Props): ReturnType => {
 		fetchVideo(controller);
 		const event = stream(`/video/${id}/sse`);
 		event.onmessage = (event) => {
-			const data: Event<unknown> = event.data;
+			const data: Event<unknown> = JSON.parse(event.data);
 			data.event === 'heartbeat' ? void 0 : reloadVideo(true);
 		};
 		return () => {

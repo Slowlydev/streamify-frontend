@@ -23,7 +23,7 @@ const useComments = ({ video }: Props): ReturnType => {
 
 	const fetchComments = useCallback(
 		async (controller?: AbortController, silent?: boolean) => {
-			if (video) {
+			if (video?.id) {
 				try {
 					!silent && setIsLoading(true);
 					const { data } = await getComments(video.id, controller);
@@ -38,7 +38,7 @@ const useComments = ({ video }: Props): ReturnType => {
 				}
 			}
 		},
-		[video],
+		[video?.id],
 	);
 
 	const reloadComments = useCallback(
@@ -53,7 +53,7 @@ const useComments = ({ video }: Props): ReturnType => {
 		fetchComments(controller);
 		const event = stream(`/video/${video?.id}/comment/sse`);
 		event.onmessage = (event) => {
-			const data: Event<unknown> = event.data;
+			const data: Event<unknown> = JSON.parse(event.data);
 			data.event === 'heartbeat' ? void 0 : reloadComments(true);
 		};
 		return () => {
