@@ -51,7 +51,7 @@ const useComments = ({ video }: Props): ReturnType => {
 	useEffect(() => {
 		const controller = new AbortController();
 		fetchComments(controller);
-		const event = stream(`/video/${video?.id}/comments/sse`);
+		const event = stream(`/video/${video?.id}/comment/sse`);
 		event.onmessage = (event) => {
 			const data: Event<unknown> = event.data;
 			data.event === 'heartbeat' ? void 0 : reloadComments(true);
