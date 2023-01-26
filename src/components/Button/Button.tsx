@@ -10,11 +10,14 @@ type Props = {
 	color: ButtonColor;
 	disabled?: boolean;
 	loading?: boolean;
+	className?: string;
+
 	onClick?: () => void;
 };
 
-const Button = ({ type, text, color, disabled, loading, onClick }: Props): ReactElement => {
+const Button = ({ type, text, color, disabled, loading, onClick, className }: Props): ReactElement => {
 	const classes = cl(
+		className,
 		styles.button,
 		color === 'blue' && styles.blue,
 		color === 'grey' && styles.grey,
