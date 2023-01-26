@@ -51,7 +51,7 @@ const VideoDetailPage = (): ReactElement => {
 	};
 
 	return (
-		<main className={cl(pages.topWrapper, pages.wrapper)}>
+		<main className={cl(styles.main, pages.topWrapper, pages.wrapper)}>
 			<section className={styles.mainVideo}>
 				{isLoading && <LoadingSpinner size={'large'} />}
 				{hasError && <ErrorState size={'large'} />}
