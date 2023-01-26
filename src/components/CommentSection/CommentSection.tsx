@@ -27,14 +27,13 @@ const CommentSection = ({ video }: Props): ReactElement => {
 	const { t } = useTranslation();
 	const { user } = useAuth();
 	const { addSuccess, addFailure } = useNotifications();
-	const { comments, isLoading, hasError, reloadComments } = useComments({ video });
+	const { comments, isLoading, hasError } = useComments({ video });
 
 	const createComment = async (values: InitialValues): Promise<void> => {
 		try {
 			await postComment(video.id, values);
 			addSuccess(t('notifications.comment.success'));
-			reloadComments(true);
-			initialValues.content = '';
+			values.content = '';
 		} catch {
 			addFailure(t('notifications.comment.failure'));
 		}
