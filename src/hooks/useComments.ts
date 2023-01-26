@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getComments } from '../services/commentService';
+import { stream } from '../services/stream';
 import { Comment } from '../types/comment.type';
+import { Event } from '../types/event.type';
 import { Video } from '../types/video.type';
 
 type Props = {
@@ -49,11 +51,17 @@ const useComments = ({ video }: Props): ReturnType => {
 	useEffect(() => {
 		const controller = new AbortController();
 		fetchComments(controller);
+		const event = stream(`/video/${video?.id}/comments/sse`);
+		event.onmessage = (event) => {
+			const data: Event<unknown> = event.data;
+			data.event === 'heartbeat' ? void 0 : reloadComments(true);
+		};
 		return () => {
+			event.close();
 			controller.abort();
 			setComments(undefined);
 		};
-	}, [fetchComments, reloadComments]);
+	}, [fetchComments, reloadComments, video?.id]);
 
 	return { comments, isLoading, hasError, reloadComments };
 };
