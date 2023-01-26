@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getVideos } from '../services/videoService';
-import { Video } from '../types/video.type';
+import { Video, VideoFilters } from '../types/video.type';
 
 type Props = {
-	filters?: { title?: Video['title'] };
+	filters?: VideoFilters;
 };
 
 type ReturnType = {
