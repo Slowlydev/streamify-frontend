@@ -15,4 +15,6 @@ export type Video = Base & {
 export type VideoFilters = {
 	title?: Video['title'];
 	user?: User['id'];
+	skip?: number;
+	take?: number;
 };
