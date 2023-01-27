@@ -1,16 +1,12 @@
 .button {
-	height: 40px;
+	height: 3rem;
+
 	min-width: 120px;
 	max-width: 200px;
-	margin: 0px;
-	padding: 4px 16px;
-	font-size: 16px;
-	font-weight: 500;
-	border-width: 0px;
-	border-radius: 1rem;
-}
 
-.button:hover {
+	border: none;
+	border-radius: 1rem;
+
 	cursor: pointer;
 }
 

@@ -1,33 +1,32 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getComments } from '../services/commentService';
 import { stream } from '../services/stream';
-import { Comment } from '../types/comment.type';
+import { getVideo } from '../services/videoService';
 import { Event } from '../types/event.type';
 import { Video } from '../types/video.type';
 
 type Props = {
-	video?: Video;
+	id?: Video['id'];
 };
 
 type ReturnType = {
-	comments: Comment[] | undefined | null;
+	video: Video | undefined | null;
 	isLoading: boolean;
 	hasError: boolean;
-	reloadComments: (silent?: boolean) => Promise<void>;
+	reloadVideo: (silent?: boolean) => Promise<void>;
 };
 
-const useComments = ({ video }: Props): ReturnType => {
-	const [comments, setComments] = useState<Comment[] | undefined | null>();
+const useVideo = ({ id }: Props): ReturnType => {
+	const [video, setVideo] = useState<Video | undefined | null>();
 	const [hasError, setHasError] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const fetchComments = useCallback(
+	const fetchVideo = useCallback(
 		async (controller?: AbortController, silent?: boolean) => {
-			if (video?.id) {
+			if (id) {
 				try {
 					!silent && setIsLoading(true);
-					const { data } = await getComments(video.id, controller);
-					setComments(data ?? null);
+					const { data } = await getVideo(id);
+					setVideo(data ?? null);
 					!silent && setIsLoading(false);
 					setHasError(false);
 				} catch (err) {
@@ -38,32 +37,32 @@ const useComments = ({ video }: Props): ReturnType => {
 				}
 			}
 		},
-		[video?.id],
+		[id],
 	);
 
-	const reloadComments = useCallback(
+	const reloadVideo = useCallback(
 		async (silent?: boolean): Promise<void> => {
-			await fetchComments(undefined, silent);
+			await fetchVideo(undefined, silent);
 		},
-		[fetchComments],
+		[fetchVideo],
 	);
 
 	useEffect(() => {
 		const controller = new AbortController();
-		fetchComments(controller);
-		const event = stream(`/video/${video?.id}/comment/sse`);
+		fetchVideo(controller);
+		const event = stream(`/video/${id}/sse`);
 		event.onmessage = (event) => {
 			const data: Event<unknown> = JSON.parse(event.data);
-			data.event === 'heartbeat' ? void 0 : reloadComments(true);
+			data.event === 'heartbeat' ? void 0 : reloadVideo(true);
 		};
 		return () => {
 			event.close();
 			controller.abort();
-			setComments(undefined);
+			setVideo(undefined);
 		};
-	}, [fetchComments, reloadComments, video?.id]);
+	}, [fetchVideo, id, reloadVideo]);
 
-	return { comments, isLoading, hasError, reloadComments };
+	return { video, isLoading, hasError, reloadVideo };
 };
 
-export default useComments;
+export default useVideo;

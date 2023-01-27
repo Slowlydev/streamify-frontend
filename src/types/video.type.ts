@@ -7,5 +7,12 @@ export type Video = Base & {
 	views: number;
 	likes: number;
 	dislikes: number;
+	liked: boolean;
+	disliked: boolean;
 	user: User;
+};
+
+export type VideoFilters = {
+	title?: Video['title'];
+	user?: User['id'];
 };

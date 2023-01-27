@@ -14,17 +14,17 @@
 	--button-grey-hover: #bfbfbf;
 	--button-grey-loading: #dfdfdf;
 
-	--button-blue: #2e78ee;
-	--button-blue-hover: #1661da;
+	--button-blue: #7d9df5;
+	--button-blue-hover: #4d71d3;
 	--button-blue-loading: #dfdfff;
 
 	--validation-error: #df0000;
 
-	--notification-success-label: #0eb20e;
-	--notification-success-body: #efffef;
+	--notification-success-label: #57c2a2;
+	--notification-success-body: #b6eada;
 
-	--notification-failure-label: #dc0000;
-	--notification-failure-body: #ffefef;
+	--notification-failure-label: #ee3b3b;
+	--notification-failure-body: #f48484;
 
 	--signin-background-image-desktop: url(/src/assets/images/mountains-large.jpg);
 	--signin-background-image-mobile: url(/src/assets/images/mountains-small.jpg);
