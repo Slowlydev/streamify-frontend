@@ -16,3 +16,4 @@ coverage
 
 # logs
 *.log
+/.yarn
